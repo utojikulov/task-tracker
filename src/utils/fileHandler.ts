@@ -1,19 +1,15 @@
-import { error } from "console";
-import fs from "fs";
+import fs from "fs/promises";
+import { Task } from "../types/interface.task.js";
 
 const taskFile = "tasks.json";
 const taskFilePath = new URL(taskFile, import.meta.url).pathname;
 
 // initializing if the task file exists and creating if it is not.
-export function createTaskFile() {
+export async function createTaskFile() {
   try {
-    if (!fs.existsSync(taskFilePath)) {
-      fs.writeFile(taskFile, "[]", (err) => {
-        if (err) throw err;
-      });
-    }
+    await fs.access(taskFilePath);
   } catch {
-    console.error(`Error on creating file ${taskFile}`, error);
+    await fs.writeFile(taskFilePath, "[]");
   }
 }
 
@@ -21,14 +17,15 @@ export function createTaskFile() {
 export async function loadFile() {
   try {
     createTaskFile();
-    return JSON.parse(await fs.readFile(taskFilePath));
+    const data = await fs.readFile(taskFilePath, "utf-8");
+    return JSON.parse(data);
   } catch (error) {
     console.error(`Error loading file ${taskFile}`, error);
   }
 }
 
 // generating id for each
-export async function generateId(taskList) {
+export function generateId(taskList: Task[]): number {
   let maxId = 0;
   for (const task of taskList) {
     maxId = Math.max(maxId, task.id);
@@ -37,9 +34,9 @@ export async function generateId(taskList) {
 }
 
 // saving tasks
-export async function save(tasks) {
+export async function save(tasks: Task[]): Promise<void> {
   try {
-    await fs.writeFile(taskFilePath, JSON.stringify(tasks));
+    await fs.writeFile(taskFilePath, JSON.stringify(tasks, null, 2));
   } catch (error) {
     console.error(`Error loading file ${taskFile}`, error);
   }
