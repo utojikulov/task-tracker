@@ -1,5 +1,5 @@
-const taskStatus = ["done", "todo", "inprogress"];
-const vaildOptions = [
+const validStatus = ["done", "todo", "inprogress"];
+const validOptions = [
   "add",
   "remove",
   "update",
@@ -16,7 +16,15 @@ export function validateTaskId(id: number) {
   }
 }
 
-export function validateTaskStatus(status: string[]) {}
+export function validateTaskStatus(status: string) {
+  if (!validStatus.includes(status) && status !== undefined) {
+    throw new Error(
+      `Invalid task status '${status}'. Provide a valid option: ${validStatus.join(
+        ", ",
+      )}.`,
+    ).message;
+  }
+}
 
 export function validateTaskDescription(description: string) {
   if (!description) {
@@ -24,4 +32,8 @@ export function validateTaskDescription(description: string) {
   }
 }
 
-export function validateTaskOption(option) {}
+export function validateTaskOption(option: string) {
+  if (!validOptions.includes(option)) {
+    console.error(`Invalid option. Valid options: ${validOptions.join(", ")}`);
+  }
+}
