@@ -17,9 +17,9 @@ async function main() {
     // case "update":
     //   await updateTask(arg1, arg2);
     //   break;
-    // case "list":
-    //   await readTask(arg1);
-    //   break;
+    case "list":
+      await readTask(arg1);
+      break;
     // case "mark-todo":
     //   await updateTask(option, arg1);
     //   break;
