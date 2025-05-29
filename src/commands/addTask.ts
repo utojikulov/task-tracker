@@ -1,9 +1,9 @@
-import { loadFile, generateId, save } from "../utils/fileHandler.js";
+import { loadFile, generateId, save } from "../utils/handler.js";
 import { Task } from "../types/interface.task.js";
 import chalk from "chalk";
-import { validateTaskDescription } from "../validations/validateTask.js";
+import { validateTaskDescription } from "../validations/validations.js";
 
-export async function addTask(description: string) {
+export async function add(description: string) {
   try {
     validateTaskDescription(description);
 

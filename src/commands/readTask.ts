@@ -1,10 +1,10 @@
 import { Task } from "../types/interface.task.js";
-import { loadFile } from "../utils/fileHandler.js";
-import { validateTaskStatus } from "../validations/validateTask.js";
+import { loadFile } from "../utils/handler.js";
+import { validateTaskStatus } from "../validations/validations.js";
 import chalk from "chalk";
 // import boxen from "boxen";
 
-export async function readTask(status: string): Promise<void> {
+export async function read(status: string): Promise<void> {
   try {
     const tasks: Task[] = await loadFile();
 

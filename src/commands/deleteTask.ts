@@ -1,8 +1,8 @@
-import { validateTaskId } from "../validations/validateTask.js";
-import { loadFile, save } from "../utils/fileHandler.js";
+import { validateTaskId } from "../validations/validations.js";
+import { loadFile, save } from "../utils/handler.js";
 import { Task } from "../types/interface.task.js";
 
-export async function deleteTask(id: number): Promise<void> {
+export async function del(id: number): Promise<void> {
   try {
     validateTaskId(id);
     const tasks: Task[] = await loadFile();

@@ -1,11 +1,11 @@
 import {
   validateTaskId,
   validateTaskStatus,
-} from "../validations/validateTask.js";
-import { loadFile, save } from "../utils/fileHandler.js";
+} from "../validations/validations.js";
+import { loadFile, save } from "../utils/handler.js";
 import { Task } from "../types/interface.task.js";
 
-export async function updateTaskStatus(option: string, id: number) {
+export async function updateStatus(option: string, id: number) {
   const validTaskOptions: { [index: string]: any } = {
     "mark-todo": "todo",
     "mark-inprogress": "inprogress",

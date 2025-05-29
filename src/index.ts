@@ -1,30 +1,30 @@
-import { addTask } from "./commands/addTask.js";
-import { deleteTask } from "./commands/deleteTask.js";
-import { readTask } from "./commands/readTask.js";
-import { updateTaskStatus } from "./commands/updateTask.js";
-import { validateTaskOption } from "./validations/validateTask.js";
+import { add } from "./commands/addTask.js";
+import { del } from "./commands/deleteTask.js";
+import { read } from "./commands/readTask.js";
+import { updateStatus } from "./commands/updateTask.js";
+import { validateTaskOption } from "./validations/validations.js";
 
 const [, , command, arg] = process.argv;
 
 async function main() {
   switch (command) {
     case "add":
-      await addTask(arg);
+      await add(arg);
       break;
     case "remove":
-      await deleteTask(Number(arg));
+      await del(Number(arg));
       break;
     case "list":
-      await readTask(arg);
+      await read(arg);
       break;
     case "mark-todo":
-      await updateTaskStatus(command, Number(arg));
+      await updateStatus(command, Number(arg));
       break;
     case "mark-done":
-      await updateTaskStatus(command, Number(arg));
+      await updateStatus(command, Number(arg));
       break;
     case "mark-inprogress":
-      await updateTaskStatus(command, Number(arg));
+      await updateStatus(command, Number(arg));
       break;
     default:
       validateTaskOption(command);

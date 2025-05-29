@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:15.3-alpine
+    restart: always
+    container_name: tasktracker-postgres
+    environment:
+      POSTGRES_DB: tasktracker-db
+      POSTGRES_USER: tasktracker-user
+      POSTGRES_PASSWORD: ttpassword
+
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -U tasktracker-user
+      interval: 10s
+      timeout: 5s
+      retries: 3
