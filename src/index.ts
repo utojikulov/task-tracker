@@ -15,11 +15,11 @@ async function main() {
     case "remove":
       await del(Number(arg));
       break;
+    case "update":
+      await updateDesc(Number(arg), arg1);
     case "list":
       await read(arg);
       break;
-    case "update":
-      await updateDesc(Number(arg), arg1);
     case "mark-todo":
       await updateStatus(command, Number(arg));
       break;
