@@ -1,10 +1,11 @@
 import { add } from "./commands/addTask.js";
 import { del } from "./commands/deleteTask.js";
 import { read } from "./commands/readTask.js";
-import { updateStatus } from "./commands/updateTask.js";
+import { updateDesc } from "./commands/updateDesc.js";
+import { updateStatus } from "./commands/updateStatus.js";
 import { validateTaskOption } from "./validations/validations.js";
 
-const [, , command, arg] = process.argv;
+const [, , command, arg, arg1] = process.argv;
 
 async function main() {
   switch (command) {
@@ -17,6 +18,8 @@ async function main() {
     case "list":
       await read(arg);
       break;
+    case "update":
+      await updateDesc(Number(arg), arg1);
     case "mark-todo":
       await updateStatus(command, Number(arg));
       break;
